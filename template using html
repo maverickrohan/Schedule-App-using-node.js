@@ -1,0 +1,22 @@
+<!-- index.ejs -->
+<h1>To-Do List</h1>
+<ul>
+  <% todos.forEach((todo) => { %>
+    <li>
+      <%= todo.text %>
+      (<%= todo.completed ? 'Completed' : 'Not Completed' %>)
+      <form action="/update/<%= todo._id %>" method="post">
+        <input type="text" name="text" value="<%= todo.text %>">
+        <input type="checkbox" name="completed" <%= todo.completed ? 'checked' : '' %>>
+        <button type="submit">Update</button>
+      </form>
+      <form action="/delete/<%= todo._id %>" method="post">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+  <% }); %>
+</ul>
+<form action="/create" method="post">
+  <input type="text" name="text" placeholder="Add new to-do item">
+  <button type="submit">Add</button>
+</form>
